@@ -1,4 +1,4 @@
-import CatalogDashboard from "../after-ai-cmo-main/components/CatalogDashboard";
+import CatalogDashboard from "../components/CatalogDashboard";
 
 export default function Catalogs() {
   return <CatalogDashboard />;
