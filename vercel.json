@@ -1,11 +1,8 @@
 {
   "version": 2,
-  "buildCommand": "npm run build",
-  "outputDirectory": "apps/frontend/after-ai-cmo-main/.next",
-  "framework": "nextjs",
   "builds": [
     {
-      "src": "apps/frontend/after-ai-cmo-main/package.json",
+      "src": "apps/frontend/after-ai-cmo-main/next.config.js",
       "use": "@vercel/next"
     }
   ],
