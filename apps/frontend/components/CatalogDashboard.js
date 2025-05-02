@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 
@@ -115,10 +114,73 @@ export default function CatalogDashboard() {
           <h2 className="text-lg font-bold tracking-tight">AFTER AI</h2>
         </div>
         <div className="flex gap-2">
-          <Button className="bg-[#019863] text-white">c@camm.org - Base Account</Button>
-          <Button className="bg-[#F4EFE6] text-[#1C160C]">▼</Button>
+          <button className="bg-[#019863] text-white px-4 py-2 rounded-full text-sm font-semibold">
+            c@camm.org - Base Account
+          </button>
+          <button className="bg-[#F4EFE6] text-[#1C160C] px-4 py-2 rounded-full text-sm font-semibold">
+            ▼
+          </button>
         </div>
       </header>
+
+      <main className="px-6 py-5 flex flex-col gap-4">
+        <div className="flex justify-between items-center">
+          <h1 className="text-4xl font-black text-[#1C160C] tracking-tight">CATALOGS</h1>
+          <div>
+            <input
+              id="upload"
+              type="file"
+              accept=".xml,.csv,.json"
+              onChange={handleNewCatalog}
+              className="hidden"
+            />
+            <label htmlFor="upload">
+              <button className="bg-[#019863] text-white px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2">
+                {loading && <span className="animate-spin">⏳</span>} New Catalog
+              </button>
+            </label>
+          </div>
+        </div>
+
+        <div className="overflow-hidden rounded-xl border border-[#E9DFCE]">
+          <table className="w-full">
+            <thead>
+              <tr className="bg-white text-left text-sm font-medium text-[#1C160C]">
+                <th className="px-4 py-3 w-[400px]">CATALOG</th>
+                <th className="px-4 py-3 w-[400px]">DETAILS</th>
+                <th className="px-4 py-3 w-[400px]">REGION</th>
+                <th className="px-4 py-3 w-60">STATUS</th>
+                <th className="px-4 py-3 w-60 text-[#A18249]">ACTIONS</th>
+              </tr>
+            </thead>
+            <tbody>
+              {catalogs.map((cat, i) => (
+                <tr key={i} className="border-t border-[#E9DFCE] text-sm text-[#1C160C]">
+                  <td className="px-4 py-2">{cat.name}</td>
+                  <td className="px-4 py-2 text-[#A18249]">
+                    {cat.details.count} CATALOG<br />
+                    PRODUCTS: {cat.details.products}<br />
+                    FORMAT: {cat.details.format}<br />
+                    LANGUAGE: {cat.details.language}
+                  </td>
+                  <td className="px-4 py-2 text-[#A18249]">{cat.region}</td>
+                  <td className="px-4 py-2">
+                    <div className="flex flex-col items-start">
+                      <span>{cat.status}</span>
+                      {cat.scorecard && (
+                        <span className="text-xs text-green-600">GTINs: {cat.scorecard.gtin}% | Attr: {cat.scorecard.attributes}%</span>
+                      )}
+                    </div>
+                  </td>
+                  <td className="px-4 py-2 font-bold tracking-wide text-[#A18249]">
+                    {cat.actions.join(", ")}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </main>
     </div>
   );
 }
