@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { Loader2 } from "lucide-react";
 
 export default function CatalogDashboard() {
   const [catalogs, setCatalogs] = useState([]);
@@ -168,7 +167,9 @@ export default function CatalogDashboard() {
                     <div className="flex flex-col items-start">
                       <span>{cat.status}</span>
                       {cat.scorecard && (
-                        <span className="text-xs text-green-600">GTINs: {cat.scorecard.gtin}% | Attr: {cat.scorecard.attributes}%</span>
+                        <span className="text-xs text-green-600">
+                          GTINs: {cat.scorecard.gtin}% | Attr: {cat.scorecard.attributes}%
+                        </span>
                       )}
                     </div>
                   </td>
