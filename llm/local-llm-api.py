@@ -28,6 +28,8 @@ def get_status():
 @app.get("/", response_class=HTMLResponse)
 def root_dashboard():
     html_path = Path(__file__).parent / "dashboard.html"
+    if not html_path.exists():
+        return HTMLResponse("<h1>⚠️ dashboard.html not found</h1>", status_code=404)
     return HTMLResponse(content=html_path.read_text(encoding="utf-8"))
 
 @app.get("/dashboard", response_class=HTMLResponse)
