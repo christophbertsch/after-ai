@@ -27,13 +27,14 @@ def get_status():
 
 @app.get("/", response_class=HTMLResponse)
 def root_dashboard():
-    html_path = Path(__file__).parent / "dashboard-dark.html"
+    html_path = Path(__file__).parent / "dashboard.html"
     return HTMLResponse(content=html_path.read_text(encoding="utf-8"))
 
 @app.get("/dashboard", response_class=HTMLResponse)
 def read_dashboard():
     html_path = Path(__file__).parent / "dashboard.html"
-    return Response(content=html_path.read_text(encoding="utf-8"), media_type="text/html")
+    content = html_path.read_text(encoding="utf-8")
+    return Response(content=content, media_type="text/html")
 
 @app.get("/test")
 def test_html():
