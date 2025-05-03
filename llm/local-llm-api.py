@@ -122,3 +122,8 @@ def get_system_status():
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("local-llm-api:app", host="127.0.0.1", port=8000, reload=False)
+@app.get("/debug-path", response_class=HTMLResponse)
+
+def debug_path():
+    html_path = Path(__file__).parent / "dashboard.html"
+    return f"<pre>DEBUG PATH:\n{html_path.resolve()}\nExists: {html_path.exists()}</pre>"
