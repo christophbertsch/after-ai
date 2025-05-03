@@ -29,11 +29,13 @@ def get_status():
 def root_dashboard():
     html_path = Path(__file__).parent / "dashboard.html"
     print(f">> [DEBUG] Attempting to read: {html_path.resolve()}")
+    if not html_path.exists():
+        return HTMLResponse("<h1>⚠️ dashboard.html not found</h1>", status_code=404)
     try:
         content = html_path.read_text(encoding="utf-8")
         return HTMLResponse(content=content, status_code=200)
     except Exception as e:
-        return HTMLResponse(content=f"<h1>⚠️ Error reading dashboard.html</h1><p>{e}</p>", status_code=500)
+        return HTMLResponse(f"<h1>⚠️ Failed to load dashboard.html</h1><p>{e}</p>", status_code=500)
 
 @app.get("/dashboard", response_class=HTMLResponse)
 def read_dashboard():
